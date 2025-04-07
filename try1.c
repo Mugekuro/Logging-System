@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-
+// comment
 int main() {
     char username[20], password[20];
     char correctUser[] = "admin";
