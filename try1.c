@@ -68,9 +68,8 @@ int main() {
             printf("\n\t4. View Log");
             printf("\n\t5. Exit");
             printf("\n\t===============================");
-            printf("\n\tEnter your choice: ");
+            printf("\n\tChoose (1-5): ");
 
-            printf("\n");
 
             choice = getch(); //https://markaicode.com/learn-getch-function-in-c-complete-guide-with-examples/
             switch (choice) {
