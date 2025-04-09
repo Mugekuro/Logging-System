@@ -20,6 +20,7 @@ int main() {
     char correctPass[] = "1234";
     int choice;
 
+    //comment
 
     printf("\n\t=====================================");
     printf("\n\t=                                   =");
