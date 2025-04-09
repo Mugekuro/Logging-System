@@ -1,6 +1,18 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
+void maskPassword(char password[]) { //https://www.youtube.com/watch?v=-lexb9VFCPM
+    int i = 0;
+    char ch;
+    while ((ch = _getch()) != 13) {
+        printf("*");
+        password[i] = ch;
+        i++;
+    }
+    password[i] = '\0';
+}
 
 int main() {
     char username[20], password[20];
@@ -31,8 +43,10 @@ int main() {
     // Get username and password
     printf("\n\tEnter Username: ");
     scanf("%s", username);
+
     printf("\tEnter Password: ");
-    scanf("%s", password);
+    maskPassword(password);
+    printf("\n");
 
     // Check if login credentials are correct
     if (strcmp(username, correctUser) == 0 && strcmp(password, correctPass) == 0) {
@@ -44,7 +58,7 @@ int main() {
         getchar();  // Consume newline left by previous scanf
         getchar();  // Wait for Enter key press
 
-        while (1) {
+        while (true) {
             system("cls");
             printf("\n\t===============================");
             printf("\n\t             MENU              ");
@@ -82,6 +96,6 @@ int main() {
         printf("\n\tInvalid Username or Password. Try again.\n");
     }
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 //comment
