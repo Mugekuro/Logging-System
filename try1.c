@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include <stdbool.h> //For true/false
+#include <conio.h> // For getch()
 
 void maskPassword(char password[]) { //https://www.youtube.com/watch?v=-lexb9VFCPM
     int i = 0;
@@ -19,7 +20,6 @@ int main() {
     char correctUser[] = "admin";
     char correctPass[] = "1234";
     int choice;
-
 
 
     printf("\n\t=====================================");
@@ -70,27 +70,33 @@ int main() {
             printf("\n\t5. Exit");
             printf("\n\t===============================");
             printf("\n\tEnter your choice: ");
-            scanf("%d", &choice);
 
+            printf("\n");
+
+            choice = getch(); //https://markaicode.com/learn-getch-function-in-c-complete-guide-with-examples/
             switch (choice) {
-                case 1:
+                case '1':
                     printf("\n\tYou chose: Log as a Student\n");
                     break;
-                case 2:
+                case '2':
                     printf("\n\tYou chose: Log Officer\n");
                     break;
-                case 3:
+                case '3':
                     printf("\n\tYou chose: Payment\n");
                     break;
-                case 4:
+                case '4':
                     printf("\n\tYou chose: View Log\n");
                     break;
-                case 5:
+                case '5':
                     printf("\n\tExiting... Goodbye!\n");
-                    return 0;
+                    return EXIT_SUCCESS;
                 default:
                     printf("\n\tInvalid choice. Try again.\n");
             }
+
+            // Add a short delay before showing the menu again
+            printf("\n\tPress any key to continue...");
+            getch();
         }
     } else {
         printf("\n\tInvalid Username or Password. Try again.\n");
