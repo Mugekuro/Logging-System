@@ -5,11 +5,15 @@
 #include <conio.h> // For getch()
 
 
+
+
+
 //FUNCTION PROTOTYPE
 void maskPassword(char password[]);
 
 
 //MAIN FUNCTION ENTRY
+
 int main() {
     char username[20], password[20];
     char correctUser[] = "admin";
