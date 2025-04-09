@@ -4,17 +4,12 @@
 #include <stdbool.h> //For true/false
 #include <conio.h> // For getch()
 
-void maskPassword(char password[]) { //https://www.youtube.com/watch?v=-lexb9VFCPM
-    int i = 0;
-    char ch;
-    while ((ch = _getch()) != 13) {
-        printf("*");
-        password[i] = ch;
-        i++;
-    }
-    password[i] = '\0';
-}
 
+//FUNCTION PROTOTYPE
+void maskPassword(char password[]);
+
+
+//MAIN FUNCTION ENTRY
 int main() {
     char username[20], password[20];
     char correctUser[] = "admin";
@@ -104,4 +99,16 @@ int main() {
 
     return EXIT_SUCCESS;
 }
-//comment
+
+
+//FUNCTION DEFINITION
+void maskPassword(char password[]) { //https://www.youtube.com/watch?v=-lexb9VFCPM
+    int i = 0;
+    char ch;
+    while ((ch = _getch()) != 13) {
+        printf("*");
+        password[i] = ch;
+        i++;
+    }
+    password[i] = '\0';
+}
