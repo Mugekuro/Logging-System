@@ -1,13 +1,24 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdbool.h> //For true/false
+#include <conio.h> // For getch()
 
-// comment
+
+
+
+
+//FUNCTION PROTOTYPE
+void maskPassword(char password[]);
+
+
+//MAIN FUNCTION ENTRY
+
 int main() {
     char username[20], password[20];
     char correctUser[] = "admin";
     char correctPass[] = "1234";
     int choice;
-
 
 
     printf("\n\t=====================================");
@@ -31,8 +42,10 @@ int main() {
     // Get username and password
     printf("\n\tEnter Username: ");
     scanf("%s", username);
+
     printf("\tEnter Password: ");
-    scanf("%s", password);
+    maskPassword(password);
+    printf("\n");
 
     // Check if login credentials are correct
     if (strcmp(username, correctUser) == 0 && strcmp(password, correctPass) == 0) {
@@ -44,7 +57,7 @@ int main() {
         getchar();  // Consume newline left by previous scanf
         getchar();  // Wait for Enter key press
 
-        while (1) {
+        while (true) {
             system("cls");
             printf("\n\t===============================");
             printf("\n\t             MENU              ");
@@ -56,31 +69,50 @@ int main() {
             printf("\n\t5. Exit");
             printf("\n\t===============================");
             printf("\n\tEnter your choice: ");
-            scanf("%d", &choice);
 
+            printf("\n");
+
+            choice = getch(); //https://markaicode.com/learn-getch-function-in-c-complete-guide-with-examples/
             switch (choice) {
-                case 1:
+                case '1':
                     printf("\n\tYou chose: Log as a Student\n");
                     break;
-                case 2:
+                case '2':
                     printf("\n\tYou chose: Log Officer\n");
                     break;
-                case 3:
+                case '3':
                     printf("\n\tYou chose: Payment\n");
                     break;
-                case 4:
+                case '4':
                     printf("\n\tYou chose: View Log\n");
                     break;
-                case 5:
+                case '5':
                     printf("\n\tExiting... Goodbye!\n");
-                    return 0;
+                    return EXIT_SUCCESS;
                 default:
                     printf("\n\tInvalid choice. Try again.\n");
             }
+
+            // Add a short delay before showing the menu again
+            printf("\n\tPress any key to continue...");
+            getch();
         }
     } else {
         printf("\n\tInvalid Username or Password. Try again.\n");
     }
 
-    return 0;
+    return EXIT_SUCCESS;
+}
+
+
+//FUNCTION DEFINITION
+void maskPassword(char password[]) { //https://www.youtube.com/watch?v=-lexb9VFCPM
+    int i = 0;
+    char ch;
+    while ((ch = _getch()) != 13) {
+        printf("*");
+        password[i] = ch;
+        i++;
+    }
+    password[i] = '\0';
 }
