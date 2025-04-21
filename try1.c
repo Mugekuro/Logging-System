@@ -103,9 +103,8 @@ int main() {
                         printf("\t1. Payment\n");
                         printf("\t2. Sizing\n");
                         printf("\t3. Other Purpose\n");
-                        printf("\t4. Exit to Main Menu\n");
 
-                        printf("\n\tChoose (1-4): ");
+                        printf("\n\tChoose (1-3): ");
                         subChoice = getch();
                         printf("%c\n", subChoice);  // Echo the choice
 
@@ -162,19 +161,21 @@ int main() {
                                 printf("\tStudent Logging success at %s\n", timeStr);
                                 break;
 
-                            case '4':
-                                return 0; // or break if using loop control
                             default:
                                 printf("\n\tInvalid option. Press any key to try again...");
                                 getch();
+                                continue;
                         }
 
-                        printf("\n\tPress any key to return to Student Log Menu...");
-                        getch();
+                        char again;
+                        printf("\n\tDo you want to add another purpose? (Y/N): ");
+                        printf("%c\n", again);
+
+                        if (again == 'N' || again == 'n') {
+                            break;
+                        }
                     }
 
-                    break;
-                }
 
 
                 case '2': {
@@ -211,52 +212,66 @@ int main() {
                 }
 
                 case '3':
-                    printf("\n\tYou chose: Payment\n");
+                    printf("\n\tPayment\n");
                     break;
-                case '4': {
+               case '4': {
                     char subChoice;
                     FILE *logFile;
                     char line[256];
 
-                    system("cls");
-                    printf("\n\t====== VIEW LOGS ======\n");
-                    printf("\t1. View Student Logs\n");
-                    printf("\t2. View Officer Logs\n");
-                    printf("\n\tChoose (1-2): ");
-                    subChoice = getch();  // Get input without pressing enter
-                    printf("%c\n", subChoice); // Echo choice
+                    while (1) {
+                        system("cls");
+                        printf("\n\t====== VIEW LOGS ======\n");
+                        printf("\t1. View Student Logs\n");
+                        printf("\t2. View Officer Logs\n");
+                        printf("\t3. Return to Main Menu\n");
+                        printf("\n\tChoose (1-3): ");
+                        subChoice = getch();
+                        printf("%c\n", subChoice);
 
-                    switch (subChoice) {
-                        case '1':
-                            logFile = fopen("student_log.txt", "r");
-                            if (logFile == NULL) {
-                                printf("\n\tNo student logs found.\n");
-                            } else {
-                                printf("\n\t--- Student Logs ---\n");
-                                while (fgets(line, sizeof(line), logFile)) {
-                                    printf("\t%s", line);
+                        switch (subChoice) {
+                            case '1':
+                                logFile = fopen("student_log.txt", "r");
+                                if (logFile == NULL) {
+                                    printf("\n\tNo student logs found.\n");
+                                } else {
+                                    printf("\n\t--- Student Logs ---\n");
+                                    while (fgets(line, sizeof(line), logFile)) {
+                                        printf("\t%s", line);
+                                    }
+                                    fclose(logFile);
                                 }
-                                fclose(logFile);
-                            }
-                            break;
-                        case '2':
-                            logFile = fopen("officer_log.txt", "r");
-                            if (logFile == NULL) {
-                                printf("\n\tNo officer logs found.\n");
-                            } else {
-                                printf("\n\t--- Officer Logs ---\n");
-                                while (fgets(line, sizeof(line), logFile)) {
-                                    printf("\t%s", line);
+                                break;
+
+                            case '2':
+                                logFile = fopen("officer_log.txt", "r");
+                                if (logFile == NULL) {
+                                    printf("\n\tNo officer logs found.\n");
+                                } else {
+                                    printf("\n\t--- Officer Logs ---\n");
+                                    while (fgets(line, sizeof(line), logFile)) {
+                                        printf("\t%s", line);
+                                    }
+                                    fclose(logFile);
                                 }
-                                fclose(logFile);
-                            }
-                            break;
-                        default:
-                            printf("\n\tInvalid choice.\n");
+                                break;
+
+                            case '3':
+                                // Exit back to main menu
+                                return 0;  // Use break here if not exiting whole program
+                                break;
+
+                            default:
+                                printf("\n\tInvalid choice. Please try again.\n");
+                        }
+
+                        printf("\n\tPress any key to continue...");
+                        getch();
                     }
 
                     break;
                 }
+
 
                 case '5':
                     printf("\n\tExiting... Goodbye!\n");
@@ -269,7 +284,11 @@ int main() {
             printf("\n\tPress any key to continue...");
             getch();
         }
-    } else {
+    }
+
+    }
+
+     else {
         printf("\n\tInvalid Username or Password. Try again.\n");
     }
 
@@ -277,14 +296,14 @@ int main() {
 }
 
 
-//FUNCTION DEFINITION
-void maskPassword(char password[]) { //https://www.youtube.com/watch?v=-lexb9VFCPM
-    int i = 0;
-    char ch;
-    while ((ch = _getch()) != 13) {
-        printf("*");
-        password[i] = ch;
-        i++;
-    }
-    password[i] = '\0';
-}
+            //FUNCTION DEFINITION
+            void maskPassword(char password[]) { //https://www.youtube.com/watch?v=-lexb9VFCPM
+                int i = 0;
+                char ch;
+                while ((ch = _getch()) != 13) {
+                    printf("*");
+                    password[i] = ch;
+                    i++;
+                }
+                password[i] = '\0';
+            }
