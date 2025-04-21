@@ -20,7 +20,7 @@ int main() {
     char correctPass[] = "1234";
     int choice;
 
-    //comment
+
 
     printf("\n\t=====================================");
     printf("\n\t=                                   =");
@@ -74,9 +74,109 @@ int main() {
 
             choice = getch(); //https://markaicode.com/learn-getch-function-in-c-complete-guide-with-examples/
             switch (choice) {
-                case '1':
-                    printf("\n\tYou chose: Log as a Student\n");
+                case '1': {
+                    char studentID[20], firstName[30], lastName[30], fullName[61];
+                    char input[100];
+                    char subChoice, paymentChoice;
+                    FILE *logFile;
+                    time_t now;
+                    struct tm *local;
+                    char timeStr[100];
+
+                    system("cls");
+                    printf("\n\t====== Student Log ======\n");
+
+                    printf("\tEnter Student ID: ");
+                    scanf("%s", studentID);
+
+                    printf("\tEnter First Name: ");
+                    scanf("%s", firstName);
+
+                    printf("\tEnter Last Name: ");
+                    scanf("%s", lastName);
+
+                    snprintf(fullName, sizeof(fullName), "%s %s", firstName, lastName);
+
+                    while (1) {
+                        system("cls");
+                        printf("\n\t--- Student Log Options ---\n");
+                        printf("\t1. Payment\n");
+                        printf("\t2. Sizing\n");
+                        printf("\t3. Other Purpose\n");
+                        printf("\t4. Exit to Main Menu\n");
+
+                        printf("\n\tChoose (1-4): ");
+                        subChoice = getch();
+                        printf("%c\n", subChoice);  // Echo the choice
+
+                        // Get timestamp
+                        time(&now);
+                        local = localtime(&now);
+                        strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", local);
+
+                        switch (subChoice) {
+                            case '1': // PAYMENT
+                                printf("\n\t--- Payment Options ---\n");
+                                printf("\t1. College Shirt\n");
+                                printf("\t2. Other\n");
+                                printf("\n\tChoose (1-2): ");
+                                paymentChoice = getch();
+                                printf("%c\n", paymentChoice);
+
+                                if (paymentChoice == '1') {
+                                    strcpy(input, "College Shirt");
+                                } else if (paymentChoice == '2') {
+                                    printf("\tEnter Payment Purpose: ");
+                                    scanf(" %[^\n]", input);
+                                } else {
+                                    printf("\n\tInvalid payment option.\n");
+                                    break;
+                                }
+
+                                logFile = fopen("student_log.txt", "a");
+                                fprintf(logFile, "Student ID: %s | Name: %s | Payment: %s | Logged at: %s\n",
+                                        studentID, fullName, input, timeStr);
+                                fclose(logFile);
+                                printf("\tStudent Logging success at %s\n", timeStr);
+                                break;
+
+                            case '2': // SIZING
+                                printf("\n\tEnter T-shirt Size (e.g., S, M, L, XL): ");
+                                scanf("%s", input);
+
+                                logFile = fopen("student_log.txt", "a");
+                                fprintf(logFile, "Student ID: %s | Name: %s | Size: %s | Logged at: %s\n",
+                                        studentID, fullName, input, timeStr);
+                                fclose(logFile);
+                                printf("\tStudent Logging success at %s\n", timeStr);
+                                break;
+
+                            case '3': // OTHER PURPOSE
+                                printf("\n\tEnter Other Purpose: ");
+                                scanf(" %[^\n]", input);
+
+                                logFile = fopen("student_log.txt", "a");
+                                fprintf(logFile, "Student ID: %s | Name: %s | Purpose: %s | Logged at: %s\n",
+                                        studentID, fullName, input, timeStr);
+                                fclose(logFile);
+                                printf("\tStudent Logging success at %s\n", timeStr);
+                                break;
+
+                            case '4':
+                                return 0; // or break if using loop control
+                            default:
+                                printf("\n\tInvalid option. Press any key to try again...");
+                                getch();
+                        }
+
+                        printf("\n\tPress any key to return to Student Log Menu...");
+                        getch();
+                    }
+
                     break;
+                }
+
+
                 case '2': {
                     char officerID[20], officerName[50];
                     FILE *logFile;

@@ -1,0 +1,4 @@
+Student ID: 12345678 | Name: Shan Cantiver | Purpose: Visit | Logged at: 2025-04-21 09:40:45
+Student ID: 876543 | Name: asd hgasd | Payment: Shirt | Logged at: 2025-04-21 09:42:44
+Student ID: 876543 | Name: asd hgasd | Size: S | Logged at: 2025-04-21 09:43:05
+Student ID: 23456789 | Name: Miershan 876543 | Payment: College Shirt | Logged at: 2025-04-21 09:48:30
