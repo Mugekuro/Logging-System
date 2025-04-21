@@ -77,15 +77,87 @@ int main() {
                 case '1':
                     printf("\n\tYou chose: Log as a Student\n");
                     break;
-                case '2':
-                    printf("\n\tYou chose: Log Officer\n");
+                case '2': {
+                    char officerID[20], officerName[50];
+                    FILE *logFile;
+                    time_t now;
+                    struct tm *local;
+                    char timeStr[100];
+
+                    system("cls");
+                    printf("\n\t====== Officer Log ======\n");
+
+                    printf("\tEnter Officer Student ID: ");
+                    scanf("%s", officerID);
+
+                    printf("\tEnter Officer Name: ");
+                    scanf(" %[^\n]", officerName);
+
+                    logFile = fopen("officer_log.txt", "a");
+                    if (logFile == NULL) {
+                        printf("\n\tError: Could not open officer_log.txt\n");
+                    } else {
+                        time(&now);
+                        local = localtime(&now);
+                        strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", local);
+
+                        fprintf(logFile, "Officer ID: %s | Name: %s | Logged at: %s\n", officerID, officerName, timeStr);
+                        fclose(logFile);
+
+                        printf("\n\tOfficer Logging success at %s\n", timeStr);
+                    }
+
                     break;
+                }
+
                 case '3':
                     printf("\n\tYou chose: Payment\n");
                     break;
-                case '4':
-                    printf("\n\tYou chose: View Log\n");
+                case '4': {
+                    char subChoice;
+                    FILE *logFile;
+                    char line[256];
+
+                    system("cls");
+                    printf("\n\t====== VIEW LOGS ======\n");
+                    printf("\t1. View Student Logs\n");
+                    printf("\t2. View Officer Logs\n");
+                    printf("\n\tChoose (1-2): ");
+                    subChoice = getch();  // Get input without pressing enter
+                    printf("%c\n", subChoice); // Echo choice
+
+                    switch (subChoice) {
+                        case '1':
+                            logFile = fopen("student_log.txt", "r");
+                            if (logFile == NULL) {
+                                printf("\n\tNo student logs found.\n");
+                            } else {
+                                printf("\n\t--- Student Logs ---\n");
+                                while (fgets(line, sizeof(line), logFile)) {
+                                    printf("\t%s", line);
+                                }
+                                fclose(logFile);
+                            }
+                            break;
+                        case '2':
+                            logFile = fopen("officer_log.txt", "r");
+                            if (logFile == NULL) {
+                                printf("\n\tNo officer logs found.\n");
+                            } else {
+                                printf("\n\t--- Officer Logs ---\n");
+                                while (fgets(line, sizeof(line), logFile)) {
+                                    printf("\t%s", line);
+                                }
+                                fclose(logFile);
+                            }
+                            break;
+                        default:
+                            printf("\n\tInvalid choice.\n");
+                    }
+
                     break;
+                }
+
                 case '5':
                     printf("\n\tExiting... Goodbye!\n");
                     return EXIT_SUCCESS;
