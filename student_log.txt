@@ -7,3 +7,7 @@ Student ID: 12345 | Name: nam' name | Payment: College Shirt | Logged at: 2025-0
 Student ID: 678901 | Name: Mier Shan | Payment: College Shirt | Logged at: 2025-04-21 10:09:21
 Student ID: 678901 | Name: Mier Shan | Payment: College Shirt | Logged at: 2025-04-21 10:09:28
 Student ID: 09876543 | Name: awe qqq | Size: S | Logged at: 2025-04-21 10:10:29
+Student ID: 3456782 | Name: Miershan Cantiver | Size: S | Logged at: 2025-04-21 10:55:30
+Student ID: 3456782 | Name: Miershan Cantiver | Payment: 2 | Logged at: 2025-04-21 10:55:39
+Student ID: 3456782 | Name: Miershan Cantiver | Payment: College Shirt | Logged at: 2025-04-21 10:56:02
+Student ID: 3456782 | Name: Miershan Cantiver | Payment: College Shirt | Logged at: 2025-04-21 10:56:15
