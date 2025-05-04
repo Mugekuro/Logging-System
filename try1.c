@@ -199,14 +199,25 @@ int main() {
                     local = localtime(&now);
                     strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", local);
 
-                    fprintf(logFile, "Officer ID: %s | Name: %s | Logged at: %s\n",
-                            officerID, officerName, timeStr);
-                    fclose(logFile);
+                    // Check if file is empty (write header only once)
+                    fseek(logFile, 0, SEEK_END);
+                    long size = ftell(logFile);
+                    if (size == 0) {
+                        fprintf(logFile, "--------------------------- Officer Logs ---------------------------\n");
+                        fprintf(logFile, "--------------------------------------------------------------------\n");
+                        fprintf(logFile, "| %-20s | %-30s | %-20s |\n", "Time", "Officer ID", "Name");
+                        fprintf(logFile, "--------------------------------------------------------------------\n");
+                    }
 
+                    fprintf(logFile, "| %-20s | %-30s | %-20s |\n", timeStr, officerID, officerName );
+
+                    fclose(logFile);
                     printf("\n\tOfficer Logging success at %s\n", timeStr);
                 } else {
                     printf("\n\tError: Could not open officer_log.txt\n");
                 }
+
+
 
                 break;
             }
