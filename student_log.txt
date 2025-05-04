@@ -1,13 +1,8 @@
-Student ID: 12345678 | Name: Shan Cantiver | Purpose: Visit | Logged at: 2025-04-21 09:40:45
-Student ID: 876543 | Name: asd hgasd | Payment: Shirt | Logged at: 2025-04-21 09:42:44
-Student ID: 876543 | Name: asd hgasd | Size: S | Logged at: 2025-04-21 09:43:05
-Student ID: 23456789 | Name: Miershan 876543 | Payment: College Shirt | Logged at: 2025-04-21 09:48:30
-Student ID: 3456789 | Name: name name' | Payment: College Shirt | Logged at: 2025-04-21 09:59:26
-Student ID: 12345 | Name: nam' name | Payment: College Shirt | Logged at: 2025-04-21 10:00:53
-Student ID: 678901 | Name: Mier Shan | Payment: College Shirt | Logged at: 2025-04-21 10:09:21
-Student ID: 678901 | Name: Mier Shan | Payment: College Shirt | Logged at: 2025-04-21 10:09:28
-Student ID: 09876543 | Name: awe qqq | Size: S | Logged at: 2025-04-21 10:10:29
-Student ID: 3456782 | Name: Miershan Cantiver | Size: S | Logged at: 2025-04-21 10:55:30
-Student ID: 3456782 | Name: Miershan Cantiver | Payment: 2 | Logged at: 2025-04-21 10:55:39
-Student ID: 3456782 | Name: Miershan Cantiver | Payment: College Shirt | Logged at: 2025-04-21 10:56:02
-Student ID: 3456782 | Name: Miershan Cantiver | Payment: College Shirt | Logged at: 2025-04-21 10:56:15
+					STUDENT LOGS
+|------------------------------------------------------------------------------------------------|
+| Date & Time          | Student ID      | Name                      | Purpose                   |
+|------------------------------------------------------------------------------------------------|
+| 2025-05-04 13:55:47  | 12345678        | Miershan Cantiver         | Payment: College Shirt    |
+| 2025-05-04 13:55:50  | 12345678        | Miershan Cantiver         | Sizing: M                 |
+| 2025-05-04 13:56:06  | 0987654321      | Sung Jinwoo               | Payment: College Shirt    |
+| 2025-05-04 13:56:53  | 1234567890      | Alistair Ybanez           | Purpose: Visit            |

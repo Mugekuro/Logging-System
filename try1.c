@@ -79,7 +79,7 @@ int main() {
         switch (choice) {
             case '1': {
                 char studentID[20], firstName[30], lastName[30], fullName[61];
-                char input[100];
+                char purpose[100];
                 char subChoice, paymentChoice;
                 FILE *logFile;
                 time_t now;
@@ -114,64 +114,79 @@ int main() {
                     local = localtime(&now);
                     strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", local);
 
-                    switch (subChoice) {
-                        case '1':
-                            printf("\n\t--- Payment Options ---\n");
-                            printf("\t1. College Shirt\n");
-                            printf("\t2. Other\n");
-                            printf("\n\tChoose (1-2): ");
-                            paymentChoice = getch();
+                    logFile = fopen("student_log.txt", "a+");
+                    if (logFile) {
+                        // Check if file is empty
+                        fseek(logFile, 0, SEEK_END);
+                        long size = ftell(logFile);
+                        if (size == 0) {
+                            fprintf(logFile, "\t\t\t\t\tSTUDENT LOGS\n");
+                            fprintf(logFile, "|------------------------------------------------------------------------------------------------|\n");
+                            fprintf(logFile, "| %-20s | %-15s | %-25s | %-25s |\n", "Date & Time", "Student ID", "Name", "Purpose");
+                            fprintf(logFile, "|------------------------------------------------------------------------------------------------|\n");
+                        }
 
-                            if (paymentChoice == '1') {
-                                strcpy(input, "College Shirt");
-                            } else if (paymentChoice == '2') {
-                                printf("\n\tEnter Payment Purpose: ");
-                                scanf(" %[^\n]", input);
-                            } else {
-                                printf("\n\tInvalid payment option.\n");
+                        switch (subChoice) {
+                            case '1':
+                                printf("\n\t--- Payment Options ---\n");
+                                printf("\t1. College Shirt\n");
+                                printf("\t2. Other\n");
+                                printf("\n\tChoose (1-2): ");
+                                paymentChoice = getch();
+
+                                if (paymentChoice == '1') {
+                                    strcpy(purpose, "Payment: College Shirt");
+                                } else if (paymentChoice == '2') {
+                                    printf("\n\tEnter Payment Purpose: ");
+                                    scanf(" %[^\n]", purpose);
+                                    char temp[100] = "Payment: ";
+                                    strcat(temp, purpose);
+                                    strcpy(purpose, temp);
+                                } else {
+                                    printf("\n\tInvalid payment option.\n");
+                                    fclose(logFile);
+                                    break;
+                                }
                                 break;
-                            }
 
-                            logFile = fopen("student_log.txt", "a");
-                            fprintf(logFile, "Student ID: %s | Name: %s | Payment: %s | Logged at: %s\n",
-                                    studentID, fullName, input, timeStr);
-                            fclose(logFile);
-                            printf("\tStudent Logging success at %s\n", timeStr);
-                            break;
+                            case '2':
+                                printf("\n\tEnter T-shirt Size (e.g., S, M, L, XL): ");
+                                scanf("%s", purpose);
+                                char temp[100] = "Sizing: ";
+                                strcat(temp, purpose);
+                                strcpy(purpose, temp);
+                                break;
 
-                        case '2':
-                            printf("\n\tEnter T-shirt Size (e.g., S, M, L, XL): ");
-                            scanf("%s", input);
+                            case '3':
+                                printf("\n\tEnter Other Purpose: ");
+                                scanf(" %[^\n]", purpose);
+                                char temp2[100] = "Purpose: ";
+                                strcat(temp2, purpose);
+                                strcpy(purpose, temp2);
+                                break;
 
-                            logFile = fopen("student_log.txt", "a");
-                            fprintf(logFile, "Student ID: %s | Name: %s | Size: %s | Logged at: %s\n",
-                                    studentID, fullName, input, timeStr);
-                            fclose(logFile);
-                            printf("\tStudent Logging success at %s\n", timeStr);
-                            break;
+                            default:
+                                printf("\n\tInvalid option. Press any key to try again...");
+                                fclose(logFile);
+                                getch();
+                                continue;
+                        }
 
-                        case '3':
-                            printf("\n\tEnter Other Purpose: ");
-                            scanf(" %[^\n]", input);
+                        // Write to log file with consistent formatting
+                        fprintf(logFile, "| %-20s | %-15s | %-25s | %-25s |\n",
+                                timeStr, studentID, fullName, purpose);
+                        fclose(logFile);
+                        printf("\n\tStudent Logging success at %s\n", timeStr);
 
-                            logFile = fopen("student_log.txt", "a");
-                            fprintf(logFile, "Student ID: %s | Name: %s | Purpose: %s | Logged at: %s\n",
-                                    studentID, fullName, input, timeStr);
-                            fclose(logFile);
-                            printf("\tStudent Logging success at %s\n", timeStr);
-                            break;
+                        char again;
+                        printf("\n\tDo you want to add another purpose? (Y/N): ");
+                        scanf(" %c", &again);
 
-                        default:
-                            printf("\n\tInvalid option. Press any key to try again...");
-                            getch();
-                            continue;
+                        if (again == 'N' || again == 'n') break;
+                    } else {
+                        printf("\n\tError: Could not open student_log.txt\n");
+                        break;
                     }
-
-                    char again;
-                    printf("\n\tDo you want to add another purpose? (Y/N): ");
-                    scanf(" %c", &again);
-
-                    if (again == 'N' || again == 'n') break;
                 }
 
                 break;
@@ -203,7 +218,7 @@ int main() {
                     fseek(logFile, 0, SEEK_END);
                     long size = ftell(logFile);
                     if (size == 0) {
-                        fprintf(logFile, "\t\t\t\tOFFICER LOGS\n\n");
+                        fprintf(logFile, "\t\t\t\tOFFICER LOGS\n");
                         fprintf(logFile, "|------------------------------------------------------------------------------|\n");
                         fprintf(logFile, "| %-20s | %-28s | %-22s |\n", "Date & Time", "Officer ID", "Name");
                         fprintf(logFile, "|------------------------------------------------------------------------------|\n");
@@ -216,8 +231,6 @@ int main() {
                 } else {
                     printf("\n\tError: Could not open officer_log.txt\n");
                 }
-
-
 
                 break;
             }
