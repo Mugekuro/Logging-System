@@ -193,25 +193,25 @@ int main() {
                 printf("\tEnter Officer Name: ");
                 scanf(" %[^\n]", officerName);
 
-                logFile = fopen("officer_log.txt", "a");
+                logFile = fopen("officer_log.txt", "a+");
                 if (logFile) {
                     time(&now);
                     local = localtime(&now);
                     strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S", local);
 
-                    // Check if file is empty (write header only once)
+                    // Check if file is empty
                     fseek(logFile, 0, SEEK_END);
                     long size = ftell(logFile);
                     if (size == 0) {
-                        fprintf(logFile, "--------------------------- Officer Logs ---------------------------\n");
-                        fprintf(logFile, "--------------------------------------------------------------------\n");
-                        fprintf(logFile, "| %-20s | %-30s | %-20s |\n", "Time", "Officer ID", "Name");
-                        fprintf(logFile, "--------------------------------------------------------------------\n");
+                        fprintf(logFile, "\t\t\t\tOFFICER LOGS\n\n");
+                        fprintf(logFile, "|------------------------------------------------------------------------------|\n");
+                        fprintf(logFile, "| %-20s | %-28s | %-22s |\n", "Date & Time", "Officer ID", "Name");
+                        fprintf(logFile, "|------------------------------------------------------------------------------|\n");
                     }
 
-                    fprintf(logFile, "| %-20s | %-30s | %-20s |\n", timeStr, officerID, officerName );
-
+                    fprintf(logFile, "| %-20s | %-28s | %-22s |\n", timeStr, officerID, officerName );
                     fclose(logFile);
+
                     printf("\n\tOfficer Logging success at %s\n", timeStr);
                 } else {
                     printf("\n\tError: Could not open officer_log.txt\n");
