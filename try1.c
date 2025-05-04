@@ -121,13 +121,16 @@ int main() {
                         long size = ftell(logFile);
                         if (size == 0) {
                             fprintf(logFile, "\t\t\t\t\tSTUDENT LOGS\n");
-                            fprintf(logFile, "|------------------------------------------------------------------------------------------------|\n");
-                            fprintf(logFile, "| %-20s | %-15s | %-25s | %-25s |\n", "Date & Time", "Student ID", "Name", "Purpose");
-                            fprintf(logFile, "|------------------------------------------------------------------------------------------------|\n");
+                            fprintf(logFile, "\t|----------------------------------------------------------------------------------------------------------|\n");
+                            fprintf(logFile, "\t| %-20s | %-15s | %-25s | %-35s |\n", "Date & Time", "Student ID", "Name", "Purpose");
+                            fprintf(logFile, "\t|----------------------------------------------------------------------------------------------------------|\n");
                         }
 
                         switch (subChoice) {
-                            case '1':
+                            case '1': {
+                                float amount;
+                                char tempPurpose[100];
+
                                 printf("\n\t--- Payment Options ---\n");
                                 printf("\t1. College Shirt\n");
                                 printf("\t2. Other\n");
@@ -135,19 +138,22 @@ int main() {
                                 paymentChoice = getch();
 
                                 if (paymentChoice == '1') {
-                                    strcpy(purpose, "Payment: College Shirt");
+                                    printf("\n\tEnter amount to pay: ");
+                                    scanf("%f", &amount);
+                                    sprintf(purpose, "Payment: College Shirt (%.2f)", amount);
                                 } else if (paymentChoice == '2') {
                                     printf("\n\tEnter Payment Purpose: ");
-                                    scanf(" %[^\n]", purpose);
-                                    char temp[100] = "Payment: ";
-                                    strcat(temp, purpose);
-                                    strcpy(purpose, temp);
+                                    scanf(" %[^\n]", tempPurpose);
+                                    printf("\tEnter amount to pay: ");
+                                    scanf("%f", &amount);
+                                    sprintf(purpose, "Payment: %s (%.2f)", tempPurpose, amount);
                                 } else {
                                     printf("\n\tInvalid payment option.\n");
                                     fclose(logFile);
                                     break;
                                 }
                                 break;
+                            }
 
                             case '2':
                                 printf("\n\tEnter T-shirt Size (e.g., S, M, L, XL): ");
@@ -173,8 +179,7 @@ int main() {
                         }
 
                         // Write to log file with consistent formatting
-                        fprintf(logFile, "| %-20s | %-15s | %-25s | %-25s |\n",
-                                timeStr, studentID, fullName, purpose);
+                        fprintf(logFile, "| %-20s | %-15s | %-25s | %-35s |\n", timeStr, studentID, fullName, purpose);
                         fclose(logFile);
                         printf("\n\tStudent Logging success at %s\n", timeStr);
 
@@ -218,10 +223,10 @@ int main() {
                     fseek(logFile, 0, SEEK_END);
                     long size = ftell(logFile);
                     if (size == 0) {
-                        fprintf(logFile, "\t\t\t\tOFFICER LOGS\n");
-                        fprintf(logFile, "|------------------------------------------------------------------------------|\n");
-                        fprintf(logFile, "| %-20s | %-28s | %-22s |\n", "Date & Time", "Officer ID", "Name");
-                        fprintf(logFile, "|------------------------------------------------------------------------------|\n");
+                        fprintf(logFile, "\t\t\t\tOFFICER LOGS\n\n");
+                        fprintf(logFile, "\t|------------------------------------------------------------------------------|\n");
+                        fprintf(logFile, "\t| %-20s | %-28s | %-22s |\n", "Date & Time", "Officer ID", "Name");
+                        fprintf(logFile, "\t|------------------------------------------------------------------------------|\n");
                     }
 
                     fprintf(logFile, "| %-20s | %-28s | %-22s |\n", timeStr, officerID, officerName );
@@ -243,6 +248,16 @@ int main() {
                 char subChoice;
                 FILE *logFile;
                 char line[256];
+                char viewDate[11]; // YYYY-MM-DD
+                char currentDate[11];
+                char viewOption;
+                time_t now;
+                struct tm *local;
+
+                // Get current date
+                time(&now);
+                local = localtime(&now);
+                strftime(currentDate, sizeof(currentDate), "%Y-%m-%d", local);
 
                 while (1) {
                     system("cls");
@@ -254,31 +269,143 @@ int main() {
                     subChoice = getch();
 
                     switch (subChoice) {
-                        case '1':
+                        case '1': {
                             logFile = fopen("student_log.txt", "r");
                             if (logFile == NULL) {
                                 printf("\n\tNo student logs found.\n");
                             } else {
-                                printf("\n\t--- Student Logs ---\n");
-                                while (fgets(line, sizeof(line), logFile)) {
-                                    printf("\t%s", line);
+                                // Print header lines
+                                printf("\n\n\t--- Date: %s ---\n\n", currentDate);
+                                int headerLines = 4; // Title + blank line + header + separator
+                                for (int i = 0; i < headerLines; i++) {
+                                    if (fgets(line, sizeof(line), logFile)) {
+                                        printf("%s", line);
+                                    }
                                 }
+
+                                // First show today's logs
+                                int foundToday = 0;
+
+                                // Reset file position after header
+                                fseek(logFile, 0, SEEK_SET);
+                                for (int i = 0; i < headerLines; i++) {
+                                    fgets(line, sizeof(line), logFile);
+                                }
+
+                                while (fgets(line, sizeof(line), logFile)) {
+                                    // Check if line contains current date
+                                    if (strstr(line, currentDate)) {
+                                        printf("%s", line);
+                                        foundToday = 1;
+                                    }
+                                }
+
+                                if (!foundToday) {
+                                    printf("No logs found for today (%s).\n", currentDate);
+                                }
+
+                                // Ask if user wants to view logs from another date
+                                printf("\n\tDo you want to view logs from a specific date? (Y/N): ");
+                                scanf(" %c", &viewOption);
+
+                                if (viewOption == 'Y' || viewOption == 'y') {
+                                    printf("\tEnter date (YYYY-MM-DD): ");
+                                    scanf("%s", viewDate);
+
+                                    // Reset file position after header
+                                    fseek(logFile, 0, SEEK_SET);
+                                    for (int i = 0; i < headerLines; i++) {
+                                        fgets(line, sizeof(line), logFile);
+                                    }
+
+                                    int foundSpecific = 0;
+
+                                    while (fgets(line, sizeof(line), logFile)) {
+                                        // Check if line contains the specified date
+                                        if (strstr(line, viewDate)) {
+                                            printf("%s", line);
+                                            foundSpecific = 1;
+                                        }
+                                    }
+
+                                    if (!foundSpecific) {
+                                        printf("\tNo logs found for date %s.\n", viewDate);
+                                    }
+                                }
+
                                 fclose(logFile);
                             }
                             break;
+                        }
 
-                        case '2':
+                        case '2': {
                             logFile = fopen("officer_log.txt", "r");
                             if (logFile == NULL) {
                                 printf("\n\tNo officer logs found.\n");
                             } else {
-                                printf("\n\t--- Officer Logs ---\n");
-                                while (fgets(line, sizeof(line), logFile)) {
-                                    printf("\t%s", line);
+                                // Print header lines
+                                printf("\n\n\t--- Date: %s ---\n\n", currentDate);
+                                int headerLines = 4; // Title + blank line + header + separator
+                                for (int i = 0; i < headerLines; i++) {
+                                    if (fgets(line, sizeof(line), logFile)) {
+                                        printf("%s", line);
+                                    }
                                 }
+
+                                // First show today's logs
+                                int foundToday = 0;
+
+                                // Reset file position after header
+                                fseek(logFile, 0, SEEK_SET);
+                                for (int i = 0; i < headerLines; i++) {
+                                    fgets(line, sizeof(line), logFile);
+                                }
+
+                                while (fgets(line, sizeof(line), logFile)) {
+                                    // Check if line contains current date
+                                    if (strstr(line, currentDate)) {
+                                        printf("%s", line); // Removed \t
+                                        foundToday = 1;
+                                    }
+                                }
+
+                                if (!foundToday) {
+                                    printf("\tNo logs found for today (%s).\n", currentDate);
+                                }
+
+                                // Ask if user wants to view logs from another date
+                                printf("\n\tDo you want to view logs from a specific date? (Y/N): ");
+                                scanf(" %c", &viewOption);
+
+                                if (viewOption == 'Y' || viewOption == 'y') {
+                                    printf("\tEnter date (YYYY-MM-DD): ");
+                                    scanf("%s", viewDate);
+
+                                    // Reset file position after header
+                                    fseek(logFile, 0, SEEK_SET);
+                                    for (int i = 0; i < headerLines; i++) {
+                                        fgets(line, sizeof(line), logFile);
+                                    }
+
+                                    int foundSpecific = 0;
+
+                                    while (fgets(line, sizeof(line), logFile)) {
+                                        // Check if line contains the specified date
+                                        if (strstr(line, viewDate)) {
+                                            printf("\t%s", line);
+                                            foundSpecific = 1;
+                                        }
+                                    }
+
+                                    if (!foundSpecific) {
+                                        printf("\tNo logs found for date %s.\n", viewDate);
+                                    }
+                                }
+
                                 fclose(logFile);
                             }
                             break;
+                        }
 
                         case '3':
                             goto end_view_logs;
