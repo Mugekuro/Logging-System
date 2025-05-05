@@ -229,7 +229,7 @@ int main() {
                         fprintf(logFile, "\t|------------------------------------------------------------------------------|\n");
                     }
 
-                    fprintf(logFile, "| %-20s | %-28s | %-22s |\n", timeStr, officerID, officerName );
+                    fprintf(logFile, "\t| %-20s | %-28s | %-22s |\n", timeStr, officerID, officerName );
                     fclose(logFile);
 
                     printf("\n\tOfficer Logging success at %s\n", timeStr);
@@ -316,6 +316,7 @@ int main() {
                                     fseek(logFile, 0, SEEK_SET);
                                     for (int i = 0; i < headerLines; i++) {
                                         fgets(line, sizeof(line), logFile);
+                                        printf("%s", line);
                                     }
 
                                     int foundSpecific = 0;
@@ -385,6 +386,7 @@ int main() {
                                     fseek(logFile, 0, SEEK_SET);
                                     for (int i = 0; i < headerLines; i++) {
                                         fgets(line, sizeof(line), logFile);
+                                        printf("%s", line);
                                     }
 
                                     int foundSpecific = 0;
