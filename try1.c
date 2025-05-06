@@ -17,13 +17,15 @@ int main() {
     char tryAgain;
     int loggedIn = 0;
 
-    printf("\n\t=====================================");
-    printf("\n\t=                                   =");
-    printf("\n\t=       COLLEGE OF TECHNOLOGIES     =");
-    printf("\n\t=      Student Body Organization    =");
-    printf("\n\t=          Logging System           =");
-    printf("\n\t=                                   =");
-    printf("\n\t=====================================\n");
+
+    printf("\n\t+------------------------------------------------------+");
+    printf("\n\t|                                                      |");
+    printf("\n\t|                                                      |");
+    printf("\n\t|         Officer and Student Logging System:          |");
+    printf("\n\t|             Payment and Data Management              |");
+    printf("\n\t|                                                      |");
+    printf("\n\t|                                                      |");
+    printf("\n\t+------------------------------------------------------+\n");
 
     printf("\n\tPress Enter to continue...");
     getchar();
@@ -32,7 +34,7 @@ int main() {
 
     // LOGIN LOOP
     do {
-        printf("\n\t\t------ LOG IN ------\n");
+        printf("\n\t------------ LOG IN ------------\n");
         printf("\n\tEnter Username: ");
         scanf("%s", username);
 
@@ -41,7 +43,11 @@ int main() {
         printf("\n");
 
         if (strcmp(username, correctUser) == 0 && strcmp(password, correctPass) == 0) {
-            printf("\n\tLogin Successful! Welcome, %s.\n", username);
+            printf("\n\t+-----------------------------------------+");
+            printf("\n\t|                                         |");
+            printf("\n\t|    Login Successful! Welcome, %s.    |", username);
+            printf("\n\t|                                         |");
+            printf("\n\t+-----------------------------------------+\n");
             loggedIn = 1;
         } else {
             printf("\n\tIncorrect username or password.\n");
@@ -60,18 +66,27 @@ int main() {
     getchar();
     getchar();
 
+    /**
+
+    */
+
+
     // MAIN MENU
     while (true) {
         system("cls");
-        printf("\n\t===============================");
-        printf("\n\t             MENU              ");
-        printf("\n\t===============================");
-        printf("\n\t1. Log as a Student");
-        printf("\n\t2. Log Officer");
-        printf("\n\t3. Payment");
-        printf("\n\t4. View Log");
-        printf("\n\t5. Exit");
-        printf("\n\t===============================");
+        printf(" ==============================    College of Technologies - Student Body Organization     =============================\n\n\n");
+        printf("\t----------- Good day, %s! ----------\n", username);
+        printf("\n\t+-------------------------------------+");
+        printf("\n\t|             MAIN MENU               |");
+        printf("\n\t+-------------------------------------+");
+        printf("\n\t|                                     |");
+        printf("\n\t|       [1] Log as a Student          |");
+        printf("\n\t|       [2] Log Officer               |");
+        printf("\n\t|       [3] Payment                   |");
+        printf("\n\t|       [4] View Log                  |");
+        printf("\n\t|       [5] Exit                      |");
+        printf("\n\t|                                     |");
+        printf("\n\t+-------------------------------------+");
         printf("\n\tChoose (1-5): ");
 
         choice = getch();
@@ -87,7 +102,7 @@ int main() {
                 char timeStr[100];
 
                 system("cls");
-                printf("\n\t====== Student Log ======\n");
+                printf("\n\t------------ STUDENT LOG ------------\n");
 
                 printf("\tEnter Student ID: ");
                 scanf("%s", studentID);
@@ -102,12 +117,20 @@ int main() {
 
                 while (1) {
                     system("cls");
-                    printf("\n\t--- Student Log Options ---\n");
-                    printf("\t1. Payment\n");
-                    printf("\t2. Sizing\n");
-                    printf("\t3. Other Purpose\n");
+                    printf(" ==============================    College of Technologies - Student Body Organization     =============================\n\n");
+                    printf("\n\t ------------ STUDENT LOG ------------- \n\n");
+                    printf("\n\t+-------------------------------------+");
+                    printf("\n\t|         Student Log Options         |");
+                    printf("\n\t+-------------------------------------+");
+                    printf("\n\t|                                     |");
+                    printf("\n\t|         [1] Payment                 |");
+                    printf("\n\t|         [2] Sizing                  |");
+                    printf("\n\t|         [3] Other Purpose           |");
+                    printf("\n\t|         [4] Back to Main Menu       |");
+                    printf("\n\t|                                     |");
+                    printf("\n\t+-------------------------------------+");
 
-                    printf("\n\tChoose (1-3): ");
+                    printf("\n\tChoose (1-4): ");
                     subChoice = getch();
 
                     time(&now);
@@ -170,6 +193,8 @@ int main() {
                                 strcat(temp2, purpose);
                                 strcpy(purpose, temp2);
                                 break;
+                            case '4':
+                                goto end_view_logs;
 
                             default:
                                 printf("\n\tInvalid option. Press any key to try again...");
@@ -205,7 +230,8 @@ int main() {
                 char timeStr[100];
 
                 system("cls");
-                printf("\n\t====== Officer Log ======\n");
+                printf(" ==============================    College of Technologies - Student Body Organization     =============================\n\n");
+                printf("\n\t ------------ OFFICER LOG ------------- \n\n");
 
                 printf("\tEnter Officer Student ID: ");
                 scanf("%s", officerID);
@@ -223,13 +249,13 @@ int main() {
                     fseek(logFile, 0, SEEK_END);
                     long size = ftell(logFile);
                     if (size == 0) {
-                        fprintf(logFile, "\t\t\t\tOFFICER LOGS\n\n");
-                        fprintf(logFile, "\t|------------------------------------------------------------------------------|\n");
-                        fprintf(logFile, "\t| %-20s | %-28s | %-22s |\n", "Date & Time", "Officer ID", "Name");
-                        fprintf(logFile, "\t|------------------------------------------------------------------------------|\n");
+                        fprintf(logFile, "\t\t\tOFFICER LOGS\n\n");
+                        fprintf(logFile, "|------------------------------------------------------------------------------|\n");
+                        fprintf(logFile, "| %-20s | %-28s | %-22s |\n", "Date & Time", "Officer ID", "Name");
+                        fprintf(logFile, "|------------------------------------------------------------------------------|\n");
                     }
 
-                    fprintf(logFile, "\t| %-20s | %-28s | %-22s |\n", timeStr, officerID, officerName );
+                    fprintf(logFile, "| %-20s | %-28s | %-22s |\n", timeStr, officerID, officerName );
                     fclose(logFile);
 
                     printf("\n\tOfficer Logging success at %s\n", timeStr);
@@ -241,6 +267,7 @@ int main() {
             }
 
             case '3':
+                printf(" ==============================    College of Technologies - Student Body Organization     =============================\n\n");
                 printf("\n\tPayment (Feature under construction)\n");
                 break;
 
@@ -261,10 +288,16 @@ int main() {
 
                 while (1) {
                     system("cls");
-                    printf("\n\t====== VIEW LOGS ======\n");
-                    printf("\t1. View Student Logs\n");
-                    printf("\t2. View Officer Logs\n");
-                    printf("\t3. Return to Main Menu\n");
+                    printf(" ==============================    College of Technologies - Student Body Organization     =============================\n\n");
+                    printf("\n\t+-------------------------------------+");
+                    printf("\n\t|              View Logs              |");
+                    printf("\n\t+-------------------------------------+");
+                    printf("\n\t|                                     |");
+                    printf("\n\t|      [1] View Student Logs          |");
+                    printf("\n\t|      [2] View Officer Logs          |");
+                    printf("\n\t|      [3] Back to Main Menu          |");
+                    printf("\n\t|                                     |");
+                    printf("\n\t+-------------------------------------+");
                     printf("\n\tChoose (1-3): ");
                     subChoice = getch();
 
@@ -384,6 +417,7 @@ int main() {
 
                                     // Reset file position after header
                                     fseek(logFile, 0, SEEK_SET);
+                                    printf("\n\n");
                                     for (int i = 0; i < headerLines; i++) {
                                         fgets(line, sizeof(line), logFile);
                                         printf("%s", line);
@@ -394,7 +428,7 @@ int main() {
                                     while (fgets(line, sizeof(line), logFile)) {
                                         // Check if line contains the specified date
                                         if (strstr(line, viewDate)) {
-                                            printf("\t%s", line);
+                                            printf("%s", line);
                                             foundSpecific = 1;
                                         }
                                     }
@@ -438,6 +472,10 @@ int main() {
 
     return EXIT_SUCCESS;
 }
+
+
+
+
 
 // FUNCTION DEFINITION
 void maskPassword(char password[]) {
