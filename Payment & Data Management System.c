@@ -1,5 +1,5 @@
 /**
- * College of Technologies - Student Body Organization Management System
+ * College of Technologies - Student Body Organization
  *
  * This is a simple management system that helps track:
  * - Student visits and payments
@@ -7,6 +7,7 @@
  * - Payment records for college shirts and other fees
  * - View historical logs by date
  */
+
 
 #include <stdio.h>
 #include <string.h>
@@ -115,7 +116,7 @@ int main() {
                 char timeStr[100];
                 int studentExists = 0;
                 float currentAmountPaid = 0.0;
-                float totalAmount = 500.0;  // Cost of college shirt
+                float totalAmount = 500.0;  // Example total amount
                 char paymentStatus[10];
 
                 system("cls");
@@ -556,7 +557,7 @@ int main() {
                 // Open and display payment records
                 paymentFile = fopen("payment_records.txt", "r");
                 if (paymentFile) {
-                    // Skip the header lines
+
                     for (int i = 0; i < 4; i++) {
                         if (!fgets(line, sizeof(line), paymentFile)) {
                             fclose(paymentFile);
@@ -582,7 +583,7 @@ int main() {
 
                     printf("+-------------------------------------------------------------------------------------+\n");
 
-                    // Let user search for a specific student
+                    // specific student
                     printf("\n\tEnter Student ID to search (or press Enter to exit): ");
                     fflush(stdin);
                     char input = getchar();
