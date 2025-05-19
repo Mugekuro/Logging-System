@@ -50,7 +50,7 @@ int main() {
 
     system("cls"); // Clear the screen
 
-    // Keep asking for login until successful or user quits
+    // Keep asking for login
     do {
         printf("\n\t------------ LOG IN ------------\n");
         printf("\n\tEnter Username: ");
@@ -240,7 +240,7 @@ int main() {
                         if (studentExists) {
                             printf("\tWelcome back, %s!\n", fullName);
                         } else {
-                            printf("\tStudent ID not found. Please enter student details:\n");
+
                             break;
                         }
                     } else {
@@ -495,6 +495,8 @@ int main() {
                 break;
             }
 
+
+            //main menu - case 2
             case '2': {
                 // Handle officer logging
                 char officerID[20], officerName[50];
@@ -541,6 +543,7 @@ int main() {
                 break;
             }
 
+            // main menu - case 3
             case '3': {
                 // Show payment records
                 FILE *paymentFile;
@@ -629,8 +632,11 @@ int main() {
                 break;
             }
 
+
+
+            //main menu - case 4
             case '4': {
-                // Show historical logs
+                // Show prev logs
                 char subChoice;
                 FILE *logFile;
                 char line[256];
@@ -661,6 +667,8 @@ int main() {
                     subChoice = getch();
 
                     switch (subChoice) {
+
+                        //case 4 view student logs
                         case '1': {
                             // Show student logs
                             logFile = fopen("student_log.txt", "r");
@@ -726,6 +734,7 @@ int main() {
                             break;
                         }
 
+                        //case 4 view officer logs
                         case '2': {
                             // Show officer logs
                             logFile = fopen("officer_log.txt", "r");
@@ -791,7 +800,7 @@ int main() {
                             }
                             break;
                         }
-
+                        //back to main main (case 4)
                         case '3':
                             goto end_view_logs;
 
@@ -806,6 +815,8 @@ int main() {
                 break;
             }
 
+
+            //main menu - case 5
             case '5':
                 printf("\n\tExiting... Goodbye!\n");
                 return EXIT_SUCCESS;
