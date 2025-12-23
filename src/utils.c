@@ -279,108 +279,108 @@ int verify_password(const char* plain_password, const char* hashed_password) {
 // Additional validation functions needed by main.c
 bool validate_student_input(const Student *student) {
     if (!student) return false;
-    
+
     // Validate student ID
-    if (strlen(student->studentID) == 0 || strlen(student->studentID) >= MAX_ID_LENGTH) {
+    if (strlen(student->studentID) == 0 || strlen(student->studentID) >= MAX_ID_LEN) {
         return false;
     }
-    
+
     // Validate name
     if (strlen(student->firstName) == 0 || strlen(student->lastName) == 0 ||
         strlen(student->fullName) == 0) {
         return false;
     }
-    
+
     // Validate email format
     if (!is_valid_email(student->email)) {
         return false;
     }
-    
+
     // Validate phone (basic check)
     if (strlen(student->phone) == 0 || strlen(student->phone) > MAX_PHONE_LEN) {
         return false;
     }
-    
+
     // Validate status
-    if (strcmp(student->status, "Active") != 0 && 
-        strcmp(student->status, "Inactive") != 0 && 
+    if (strcmp(student->status, "Active") != 0 &&
+        strcmp(student->status, "Inactive") != 0 &&
         strcmp(student->status, "Graduated") != 0) {
         return false;
     }
-    
+
     return true;
 }
 
 bool validate_officer_input(const Officer *officer) {
     if (!officer) return false;
-    
+
     // Validate officer ID
-    if (strlen(officer->officerID) == 0 || strlen(officer->officerID) >= MAX_ID_LENGTH) {
+    if (strlen(officer->officerID) == 0 || strlen(officer->officerID) >= MAX_ID_LEN) {
         return false;
     }
-    
+
     // Validate name
-    if (strlen(officer->name) == 0 || strlen(officer->name) >= MAX_NAME_LENGTH) {
+    if (strlen(officer->name) == 0 || strlen(officer->name) >= MAX_NAME_LEN) {
         return false;
     }
-    
+
     // Validate position
-    if (strlen(officer->position) == 0 || strlen(officer->position) >= MAX_POSITION_LENGTH) {
+    if (strlen(officer->position) == 0 || strlen(officer->position) >= MAX_POSITION_LEN) {
         return false;
     }
-    
+
     // Validate access level
-    if (officer->accessLevel < 1 || officer->accessLevel > MAX_ACCESS_LEVEL) {
+    if (officer->accessLevel < 1 || officer->accessLevel > 5) {
         return false;
     }
-    
+
     // Validate status
-    if (strcmp(officer->status, "Active") != 0 && 
+    if (strcmp(officer->status, "Active") != 0 &&
         strcmp(officer->status, "Inactive") != 0) {
         return false;
     }
-    
+
     return true;
 }
 
 bool validate_payment_input(const Payment *payment) {
     if (!payment) return false;
-    
+
     // Validate payment ID
-    if (strlen(payment->paymentID) == 0 || strlen(payment->paymentID) >= MAX_ID_LENGTH) {
+    if (strlen(payment->paymentID) == 0 || strlen(payment->paymentID) >= MAX_ID_LEN) {
         return false;
     }
-    
+
     // Validate student ID
-    if (strlen(payment->studentID) == 0 || strlen(payment->studentID) >= MAX_ID_LENGTH) {
+    if (strlen(payment->studentID) == 0 || strlen(payment->studentID) >= MAX_ID_LEN) {
         return false;
     }
-    
+
     // Validate amount
     if (payment->amount <= 0) {
         return false;
     }
-    
+
     // Validate purpose
-    if (strlen(payment->purpose) == 0 || strlen(payment->purpose) >= MAX_PURPOSE_LENGTH) {
+    if (strlen(payment->purpose) == 0 || strlen(payment->purpose) >= MAX_PURPOSE_LEN) {
         return false;
     }
-    
+
     // Validate status
-    if (strcmp(payment->status, "Pending") != 0 && 
-        strcmp(payment->status, "Completed") != 0 && 
-        strcmp(payment->status, "Failed") != 0 && 
+    if (strcmp(payment->status, "Pending") != 0 &&
+        strcmp(payment->status, "Completed") != 0 &&
+        strcmp(payment->status, "Failed") != 0 &&
         strcmp(payment->status, "Refunded") != 0) {
         return false;
     }
-    
+
     // Validate payment method
-    if (strcmp(payment->paymentMethod, "Cash") != 0 && 
-        strcmp(payment->paymentMethod, "Card") != 0 && 
+    if (strcmp(payment->paymentMethod, "Cash") != 0 &&
+        strcmp(payment->paymentMethod, "Card") != 0 &&
         strcmp(payment->paymentMethod, "Online") != 0) {
         return false;
     }
-    
+
     return true;
 }
 

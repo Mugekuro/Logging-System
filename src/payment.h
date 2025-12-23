@@ -2,6 +2,7 @@
 #define PAYMENT_H
 
 #include "data_structures.h"
+#include <stdbool.h>
 
 // Payment management functions
 ErrorCode create_payment(const Payment* payment);
