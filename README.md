@@ -148,7 +148,7 @@ The following are the developers who contributed to this project:
 
 <div align="center">
 
-<img src="assets/resources/Alistair.png" width="100" height="100"> | <img src="assets/resources/Miershan.jpeg" width="100" height="100">
+<img src="assets/resources/Alistair.png" width="120" height="120"> | <img src="assets/resources/Miershan.jpeg" width="120" height="120">
 --- | ---
 Alistair | Miershan
 
