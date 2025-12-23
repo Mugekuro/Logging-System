@@ -40,6 +40,15 @@ The system follows a modular architecture with clear separation of concerns:
 
 ![System Architecture Flowchart](assets/resources/flowchart.png)
 
+## Developers
+
+The following are the developers who contributed to this project:
+
+<div align="center">
+  <img src="assets/resources/Alistair.png" alt="Alistair" width="150" height="150">
+  <img src="assets/resources/Miershan.jpeg" alt="Miershan" width="150" height="150">
+</div>
+
 ## Modules
 
 ### Auth Module
