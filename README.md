@@ -44,9 +44,13 @@ The system follows a modular architecture with clear separation of concerns:
 
 The following are the developers who contributed to this project:
 
+<div align="center">
+
 ![Alistair](assets/resources/Alistair.png) | ![Miershan](assets/resources/Miershan.jpeg)
 --- | ---
 Alistair | Miershan
+
+</div>
 
 ## Modules
 
