@@ -52,6 +52,7 @@ docker/
 
 # Assets that might be auto-generated
 assets/
+!assets/resources/
 
 # Tools
 tools/
