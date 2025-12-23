@@ -40,17 +40,6 @@ The system follows a modular architecture with clear separation of concerns:
 
 ![System Architecture Flowchart](assets/resources/flowchart.png)
 
-## Developers
-
-The following are the developers who contributed to this project:
-
-<div align="center">
-
-![Alistair](assets/resources/Alistair.png) | ![Miershan](assets/resources/Miershan.jpeg)
---- | ---
-Alistair | Miershan
-
-</div>
 
 ## Modules
 
@@ -152,6 +141,18 @@ The system implements comprehensive error handling:
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Developers
+
+The following are the developers who contributed to this project:
+
+<div align="center">
+
+![Alistair](assets/resources/Alistair.png) | ![Miershan](assets/resources/Miershan.jpeg)
+--- | ---
+Alistair | Miershan
+
+</div>
 
 ## Support
 
