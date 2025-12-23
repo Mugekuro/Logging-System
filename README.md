@@ -38,6 +38,8 @@ The system follows a modular architecture with clear separation of concerns:
                        └─────────────────┘
 ```
 
+![System Architecture Flowchart](assets/resources/flowchart.png)
+
 ## Modules
 
 ### Auth Module
